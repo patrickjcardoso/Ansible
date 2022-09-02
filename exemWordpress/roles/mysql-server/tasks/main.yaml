@@ -1,0 +1,25 @@
+---
+  - name: install mysql-server 
+    apt:
+      pkg:
+      - mysql-server
+      - mysql-client
+      - python3-mysqldb
+      - libmysqlclient-dev 
+
+      update_cache: yes
+
+  - name: Create User mysql
+    mysql_user:
+      name: "wpuser"
+      password: "Wp@12345" #não é uma boa prática
+      priv: '*.*:ALL'
+      host: "%"
+      state: present
+
+  - name: Criar database wordpress
+    mysql_db:
+      name: "wordpress"
+      state: present
+
+
